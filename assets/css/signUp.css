@@ -6,7 +6,14 @@ input[type=text], input[type=password], input[type=email]  {
   border: none;
   background: #f1f1f1;
 }
-
+label{
+    font-size: 25px;
+}
+h1{
+    text-align : left; 
+    color : rgb(51, 71, 3);
+    font-size: 40px; 
+}
 input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
