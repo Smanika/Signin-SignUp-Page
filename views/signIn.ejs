@@ -1,9 +1,45 @@
-<h1>Sign In User</h1>
-
-<form action="/userLogin" method="post">
+<style>
+input[type=password], input[type=email]  {
+    width: 40%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  button {
+    background-color: green;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+  .container {
+    padding: 16px;
+  }
+</style>
+<div class="container">
+    <h1>Sign In User</h1>
+    <form action="/userLogin" method="post">
    
+    <label for="email"><b>Email-Id</b></label><br>
     <input type="email" name="email" placeholder="Email id" required>
+    <br>
+    <label for="password"><b>Enter Password</b></label><br>
     <input type="password" name="password" placeholder="Your Password" required>
-   
-    <button>LogIn</button>
+    <br>
+    <button type="submit">LogIn</button>
  </form>
+</div>

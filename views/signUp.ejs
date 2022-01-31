@@ -1,9 +1,21 @@
-<h1>Sign Up User</h1>
+<link href="/css/signUp.css" rel="stylesheet" type="text/css">
 
+
+<div class="container">
+   <h1>Sign Up User</h1>
 <form action="/userCreate" method="post">
+   <label for="name"><b>Name</b></label><br>
    <input type="text" name="name" placeholder="Your Name" required>
+   <br>
+   <label for="email"><b>Email-Id</b></label><br>
    <input type="email" name="email" placeholder="Email id" required>
+   <br>
+   <label for="password"><b>Password</b></label><br>
    <input type="password" name="password" placeholder="Your Password" required>
+   <br>
+   <label for="confirm_password"><b>Repeat Passwprd</b></label><br>
    <input type="password" name="confirm_password" placeholder="Retype password" required>
-   <button>Submit</button>
+   <br>
+   <button type="submit" class="signupbtn">Submit</button>
 </form>
+</div>

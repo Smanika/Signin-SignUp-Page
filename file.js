@@ -14,6 +14,7 @@ const session = require('express-session')
 
 app.use(express.static('./assets'));
 app.set('views',path.join(__dirname,'views'));
+
 const server = require('http').createServer(app);
 const io= require('socket.io')(server,{cors:{origin:'*'}})
 const User = require('./models/user');
@@ -87,6 +88,15 @@ passport.authenticate(
     return res.redirect('/profile')
 })
 
+
+
+app.listen(PORT,function(err){
+    if(err){
+        console.log(err);
+        return;   
+     }
+        console.log("Server is running on port",PORT)
+})
 /*
 app.post('/userLogin',function(req,res){
     User.findOne({email:req.body.email},function(err,user){
@@ -107,11 +117,3 @@ app.post('/userLogin',function(req,res){
     })
 })
 */
-
-app.listen(PORT,function(err){
-    if(err){
-        console.log(err);
-        return;   
-     }
-        console.log("Server is running on port",PORT)
-})
