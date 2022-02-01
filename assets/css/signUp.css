@@ -5,18 +5,18 @@ input[type=text], input[type=password], input[type=email]  {
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  text-align: center;
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
 }
 label{
     font-size: 25px;
 }
 h1{
-    text-align : left; 
     color : rgb(51, 71, 3);
     font-size: 40px; 
-}
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
 }
 button {
   background-color: green;
@@ -34,6 +34,7 @@ button:hover {
 }
 .container {
   padding: 16px;
+  text-align: center;
 }
 
 @media screen and (max-width: 300px) {

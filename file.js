@@ -22,6 +22,7 @@ const User = require('./models/user');
 
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser()); //middleware
+app.use(passport.setAuthenticatedUser);
 
 //session used
 app.use(session({
@@ -49,7 +50,7 @@ app.get('/signup',function(req,res){
     console.log(req.cookies);
     return res.render('SignUp');
 })
-app.get('/profile',function(req,res){
+app.get('/profile',passport.checkAuthentication,function(req,res){
     return res.render('profile');
 })
 
