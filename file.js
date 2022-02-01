@@ -3,24 +3,22 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
-app.set('view engine','ejs');
-
 const database= require('./config/mongoose')
 
 //import passport
 const passport= require('passport');
 const passportLocal = require('./config/passport-local')
 const session = require('express-session');
-const { db } = require('./models/user');
+const User = require('./models/user');
 //connectMongo
 const MongoStore = require('connect-mongo');
-
+app.set('view engine','ejs');
 app.use(express.static('./assets'));
 app.set('views',path.join(__dirname,'views'));
 
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser()); //middleware
-app.use(passport.setAuthenticatedUser); // middleware
+ // middleware
 
 //session used
 app.use(session({
@@ -29,7 +27,7 @@ app.use(session({
     saveUninitialized : false,
     resave : false,
     cookie: {
-        maxAge: (1000 * 60 * 100)
+        maxAge: (100 * 60 * 1000)
     },
     //connecting mongo store
     store : MongoStore.create({
@@ -41,6 +39,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 /*
 app.get('/profile',function(req,res){
     return res.render('Profile',{name:req.cookies.name});
@@ -51,8 +50,8 @@ app.get('/signin',function(req,res){
 })
 
 app.get('/signup',function(req,res){
-    if(req.isAuthenticated()){
-        res.redirect('/profile');
+   if(req.isAuthenticated()){
+       return res.redirect('/profile');
     }
     //console.log(req.cookies);
     return res.render('signUp');
