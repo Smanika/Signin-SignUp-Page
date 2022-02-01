@@ -10,19 +10,17 @@ const database= require('./config/mongoose')
 //import passport
 const passport= require('passport');
 const passportLocal = require('./config/passport-local')
-const session = require('express-session')
+const session = require('express-session');
+const { db } = require('./models/user');
+//connectMongo
+const MongoStore = require('connect-mongo');
 
 app.use(express.static('./assets'));
 app.set('views',path.join(__dirname,'views'));
 
-const server = require('http').createServer(app);
-const io= require('socket.io')(server,{cors:{origin:'*'}})
-const User = require('./models/user');
-
-
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser()); //middleware
-app.use(passport.setAuthenticatedUser);
+app.use(passport.setAuthenticatedUser); // middleware
 
 //session used
 app.use(session({
@@ -31,8 +29,14 @@ app.use(session({
     saveUninitialized : false,
     resave : false,
     cookie: {
-        maxAge: 1000 * 60 * 100
-    }
+        maxAge: (1000 * 60 * 100)
+    },
+    //connecting mongo store
+    store : MongoStore.create({
+        mongoUrl:'mongodb://localhost:27017/login',
+        mongooseConnect: database,
+        autoRemove : 'disable' //session can't be removed automatically
+     })
 }))
 
 app.use(passport.initialize());
@@ -43,12 +47,15 @@ app.get('/profile',function(req,res){
 })
 */
 app.get('/signin',function(req,res){
-    return res.render('SignIn');
+    return res.render('signIn');
 })
 
 app.get('/signup',function(req,res){
-    console.log(req.cookies);
-    return res.render('SignUp');
+    if(req.isAuthenticated()){
+        res.redirect('/profile');
+    }
+    //console.log(req.cookies);
+    return res.render('signUp');
 })
 app.get('/profile',passport.checkAuthentication,function(req,res){
     return res.render('profile');
