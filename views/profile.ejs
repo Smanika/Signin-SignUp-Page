@@ -1,9 +1,30 @@
 <style>
+   div{
+      text-align: center;
+   }
  h1{
     text-align : center; 
     color : red;
     padding-top: 20%;
     font-size: 100px;
  }
+ a {
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+a:hover {
+    opacity:1;
+  }
 </style>
-<h1>Welcome to your account</h1>
+<div class="container">
+<h1>Welcome to your account <%=user.name %></h1>
+
+<a href="/signout">Sign out</a>
+</div>

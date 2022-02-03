@@ -60,6 +60,11 @@ app.get('/profile',passport.checkAuthentication,function(req,res){
     return res.render('profile');
 })
 
+app.get('/signout',function(req,res){
+    req.logOut();
+    return res.redirect('/signin');
+})
+
 app.post('/userCreate',function(req,res){
     if(req.body.password != req.body.confirm_password){
     console.log("Password not matched");
