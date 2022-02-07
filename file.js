@@ -10,6 +10,9 @@ const passport= require('passport');
 const passportLocal = require('./config/passport-local')
 const session = require('express-session');
 const User = require('./models/user');
+
+//import google authentication
+const googleStrategy= require('./config/passport-google-auth');
 //connectMongo
 const MongoStore = require('connect-mongo');
 app.set('view engine','ejs');
@@ -64,6 +67,13 @@ app.get('/signout',function(req,res){
     req.logOut();
     return res.redirect('/signin');
 })
+
+app.get('/auth/google',passport.authenticate('google',{scope:['profile','email']}));
+app.get('/auth/google/callback',passport.authenticate('google',{failureRedirect:'/signin'}),
+  function(req,res){
+      return res.redirect('/profile');
+  }
+)
 
 app.post('/userCreate',function(req,res){
     if(req.body.password != req.body.confirm_password){
